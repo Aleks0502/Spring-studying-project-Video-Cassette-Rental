@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Show person</title>
+</head>
+<body>
+<p th:text="'Ф.И.О, год рождения: ' + ${person.getName() + ', ' + person.getYearOfBirth()}">VALUE</p>
+<p th:text="'ID читателя: ' + ${person.getId()}">VALUE</p>
+
+<hr/>
+
+<div th:if="${videocassettes.isEmpty()}">
+    <p>Человек пока не взял ни одной кассеты.</p>
+</div>
+
+<div th:if="${!videocassettes.isEmpty()}">
+    <b>Кассеты:</b>
+    <br/>
+    <table th:each="videocassette : ${videocassettes}">
+        <tr th:text="${videocassette.getTitle() + ', ' + videocassette.getDirector() + ', ' + videocassette.getYearOfProduction() + '.'}">videocassette</tr>
+    </table>
+</div>
+
+<hr/>
+
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
+
+<!--<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать</a>-->
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+</body>
+</html>

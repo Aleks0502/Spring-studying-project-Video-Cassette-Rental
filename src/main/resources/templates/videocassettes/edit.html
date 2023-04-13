@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update videocassette</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/videocassettes/{id}(id=${videocassette.getId()})}" th:object="${videocassette}">
+    <label for="name">Введите название книги: </label>
+    <input type="text" th:field="*{title}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div>
+    <br/>
+    <label for="director">Введите автора: </label>
+    <input type="text" th:field="*{director}" id="director"/>
+    <div style="color:red" th:if="${#fields.hasErrors('director')}" th:errors="*{director}">Author Error</div>
+    <br/>
+    <label for="year">Введите год: </label>
+    <input type="text" th:field="*{yearOfProduction}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('yearOfProduction')}" th:errors="*{yearOfProduction}">Year Error</div>
+    <br/>
+    <input type="submit" value="Изменить"/>
+</form>
+
+</body>
+</html>

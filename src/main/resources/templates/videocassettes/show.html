@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show videocassette</title>
+</head>
+<body>
+<p th:text="'Название, режиссёр, год: ' + ${videocassette.getTitle() + ', ' + videocassette.getDirector() + ', ' + videocassette.getYearOfProduction()}">VALUE</p>
+<p th:text="'ID видеокассеты: ' + ${videocassette.getId()}">VALUE</p>
+
+<div th:if="${owner}">
+    <span>Видеокассету взял: </span> <span th:text="${owner.getName()}">Person name</span>
+    <form th:method="PATCH" th:action="@{/videocassettes/{id}/release(id=${videocassette.getId()})}">
+        <input type="submit" value="Освободить видеокассету">
+    </form>
+</div>
+
+<div th:if="${people}">
+    <span>Видеокассета свободна, кому назначить?</span>
+    <form th:method="PATCH" th:action="@{/videocassettes/{id}/assign(id=${videocassette.getId()})}">
+        <label for="person">Выберете человека:</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}">
+            </option>
+        </select>
+        <input type="submit" value="Назначить видеокассету"/>
+    </form>
+</div>
+
+<hr/>
+
+<form th:method="GET" th:action="@{/videocassettes/{id}/edit(id=${videocassette.getId()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/videocassettes/{id}(id=${videocassette.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+
+</body>
+</html>

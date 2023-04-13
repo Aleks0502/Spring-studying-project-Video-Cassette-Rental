@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div th:each="videocassette : ${videocassettes}">
+    <a th:href="@{/videocassettes/{id}(id=${videocassette.getId()})}"
+       th:text="${videocassette.getTitle() + ', ' + videocassette.getDirector() + ', ' + videocassette.getYearOfProduction()}">videocassette</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/videocassettes/new">Добавить видеокассету</a>
+
+</body>
+</html>
