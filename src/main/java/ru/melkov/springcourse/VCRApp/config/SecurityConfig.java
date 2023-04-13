@@ -17,6 +17,8 @@ import ru.melkov.springcourse.VCRApp.services.OurUsersDetailsService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
+    /* Git test */
+
     private final OurUsersDetailsService ourUsersDetailsService;
 
     @Autowired
